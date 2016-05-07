@@ -45,7 +45,11 @@ function davcnaStopnja(izvajalec, zanr) {
   }
 }
 
-// Prikaz seznama pesmi na strani
+
+//
+
+
+// Prikaz seznama pesmi na stran
 streznik.get('/', function(zahteva, odgovor) {
   if (!zahteva.session.idStranke) {
     odgovor.redirect('/prijava');
@@ -74,7 +78,7 @@ streznik.get('/', function(zahteva, odgovor) {
    })
   }
 })
-
+//
 // Dodajanje oz. brisanje pesmi iz košarice
 streznik.get('/kosarica/:idPesmi', function(zahteva, odgovor) {
   var idPesmi = parseInt(zahteva.params.idPesmi);
