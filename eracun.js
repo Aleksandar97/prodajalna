@@ -45,9 +45,17 @@ function davcnaStopnja(izvajalec, zanr) {
   }
 }
 
-// Prikaz seznama pesmi na strani
+
+//
+
+
+// Prikaz seznama pesmi na stran
 streznik.get('/', function(zahteva, odgovor) {
-  pb.all("SELECT Track.TrackId AS id, Track.Name AS pesem, \
+  if (!zahteva.session.idStranke) {
+    odgovor.redirect('/prijava');
+  }
+  else {
+    pb.all("SELECT Track.TrackId AS id, Track.Name AS pesem, \
           Artist.Name AS izvajalec, Track.UnitPrice * " +
           razmerje_usd_eur + " AS cena, \
           COUNT(InvoiceLine.InvoiceId) AS steviloProdaj, \
@@ -67,9 +75,10 @@ streznik.get('/', function(zahteva, odgovor) {
           vrstice[i].stopnja = davcnaStopnja(vrstice[i].izvajalec, vrstice[i].zanr);
         odgovor.render('seznam', {seznamPesmi: vrstice});
       }
-  })
+   })
+  }
 })
-
+//
 // Dodajanje oz. brisanje pesmi iz košarice
 streznik.get('/kosarica/:idPesmi', function(zahteva, odgovor) {
   var idPesmi = parseInt(zahteva.params.idPesmi);
