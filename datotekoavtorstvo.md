@@ -1,0 +1,1 @@
+Študent z vpisno številko 63150344 potrjujem, da sem edini avtor oddane domače naloge.
